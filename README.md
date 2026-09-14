@@ -33,8 +33,8 @@ Ridge on 16 features scores a zero-R² of **0.1213** out-of-sample on 5 held-out
 days, against **0.1015** for the exchange's own `ref_price` used raw. Sign accuracy
 58.9%.
 
-That +0.020 is the whole result: most of what is knowable about the cross is already
-in `ref_price`, and the auction imbalance features add about a fifth on top of it.
+The +0.020 is the result since most of what is knowable about the cross is already
+in `ref_price`.
 
 Signal is heavily concentrated near the close — zero-R² 0.235 in the final minute
 against roughly zero before 15:55.
@@ -42,14 +42,3 @@ against roughly zero before 15:55.
 A gradient-boosting model scores higher on the test set (0.1433) but loses to ridge
 on all three cross-validation folds, so it is reported and rejected rather than
 selected. See the end of `03_modeling.ipynb`.
-
-## Method notes
-
-- Splits are **by date**, never random — consecutive messages for the same
-  symbol-day are near-duplicates and a random split leaks badly.
-- Scored as R² against a **zero** prediction, not the sample mean.
-- `cv()` and `fit_test()` are separate functions so the test set cannot be used for
-  model selection by accident. It is scored once, for one model.
-- Feature clipping bounds are fitted on training data only.
-- Fold-by-fold results are reported alongside test results, since 21 days is a small
-  effective sample.
