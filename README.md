@@ -27,10 +27,6 @@ in order.
 time to the official closing cross. This is the P&L of entering a position after
 15:50 and exiting with an auction order at 16:00.
 
-Predicting the *level* of `cross` is not a real problem: the current mid alone
-explains ~99.9% of its variance. All predictable structure lives in the residual,
-and the residual is the P&L.
-
 ## Result
 
 Ridge on 16 features scores a zero-R² of **0.1213** out-of-sample on 5 held-out
